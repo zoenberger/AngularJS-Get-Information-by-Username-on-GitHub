@@ -4,12 +4,13 @@
     <script src="Scripts/angular.min.js"></script>
     <link rel="stylesheet" href="style.css" />
     <script src="script.js"></script>
+    <script src="github.js"></script>
 </head>
 <body ng-controller="MainController">
     <h1>{{message}}</h1>
     <h2>{{error}}</h2>
 
-
+    Auto-Search in {{countdown}}
     <form name="searchUser" ng-submit="search(username)">
         <input type="search" required placeholder="Github Username to Find" ng-model="username"/>
         <input type="submit" value="Search" ng-click="search(username)" />
