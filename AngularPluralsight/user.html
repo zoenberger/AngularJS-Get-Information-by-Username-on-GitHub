@@ -1,6 +1,7 @@
 ﻿
-<div id="userDetails">
+<div>
     <h2>Username: {{user.login}}</h2>
+    {{error}}
     <div>Name: {{user.name}}</div>
     <div>Location: {{user.location}}</div>
     <hr />
@@ -23,9 +24,10 @@ Order:
     </thead>
     <tbody>
         <tr ng-repeat="repo in repos| orderBy:repoSortOrder">
-            <td>{{repo.name}}</td>
+            <td><a href="#/user/{{user.login}}/{{repo.name}}">{{repo.name}}</a></td>
             <td>{{repo.stargazers_count | number}}</td>
             <td>{{repo.language}}</td>
         </tr>
     </tbody>
 </table>
+<a href="#/main">Back to Search</a>
