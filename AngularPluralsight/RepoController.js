@@ -2,27 +2,19 @@
 
 var app = angular.module('githubViewer');
 
-app.controller('RepoController', function ($scope, github, $log, $routeParams) {
+app.controller('RepoController', function ($scope, github, $routeParams) {
 
-    var repoDetail = function () {
-        github.getRepoDetail($scope.username, $scope.reponame).then(onDetail, onError);
-    };
-
-    var onDetail = function (data) {
-        $scope.repoinfo = data;
-        github.getRepoContributors($scope.username, $scope.reponame).then(onContributors, onError);
-    };
-
-    var onContributors = function (data) {
-        $scope.repocontributors = data;
+    var onRepo = function(data) {
+        $scope.repo = data;
     };
 
     var onError = function (reason) {
-        $scope.error = "Could not fetch the user";
+        $scope.error = reason;
     };
 
-    $scope.username = $routeParams.username;
-    $scope.reponame = $routeParams.reponame;
-    repoDetail();
 
+    var username = $routeParams.username;
+    var reponame = $routeParams.reponame;
+
+    github.getRepoDetails(username, reponame).then(onRepo, onError);
 });

@@ -1,11 +1,12 @@
 ﻿<div>
     <a href="#/main">Back to Search</a><br />
-    <a href="#/user/{{username}}">Back to User</a>
-    <h2>User: {{username}}</h2>
-    <h2>Repository Name: {{repoinfo.name}}</h2>
+    <a href="#/user/{{repo.owner.login}}">Back to User</a>
+    <h2>User: {{repo.owner.login}}</h2>
+    <h2>Repository Name: {{repo.name}}</h2>
+    <div>Issues : {{repo.open_issues_count}}</div>
     <hr />
     <h2>Contributors</h2>
-    <div ng-repeat="contributor in repocontributors">
+    <div ng-repeat="contributor in repo.contributors">
        <div>Username: {{contributor.login}}</div>
        <div>Contributions: {{contributor.contributions}}</div>
        <img ng-src="{{contributor.avatar_url}}" />

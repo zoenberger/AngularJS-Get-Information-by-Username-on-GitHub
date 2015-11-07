@@ -17,27 +17,25 @@
 
         };
 
-        var getRepoDetail = function (username, reponame) {
-            console.log("GETTING REPO DETAIL");
-            return $http.get("https://api.github.com/repos/" + username + "/" + reponame)
-                        .then(function (response) {
-                            return response.data;
-                        });
-        }
+        var getRepoDetails = function (username, reponame) {
+            var repo;
+            var repoUrl = "https://api.github.com/repos/" + username + "/" + reponame;
 
-        var getRepoContributors = function (username, reponame) {
-            console.log("GETTING REPO DETAIL");
-            return $http.get("https://api.github.com/repos/" + username + "/" + reponame + "/contributors")
+            return $http.get(repoUrl)
                         .then(function (response) {
-                            return response.data;
+                            repo = response.data;
+                            return $http.get(repoUrl + "/contributors");
+                        })
+                        .then(function (response) {
+                            repo.contributors = response.data;
+                            return repo;
                         });
-        }
+        };
 
         return {
             getUser: getUser,
             getRepos: getRepos,
-            getRepoDetail: getRepoDetail,
-            getRepoContributors: getRepoContributors
+            getRepoDetails: getRepoDetails
         };
     };
 
